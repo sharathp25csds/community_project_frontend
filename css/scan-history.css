@@ -59,7 +59,7 @@
 }
 
 .history-table tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: #F8FAFC;
 }
 
 /* Privacy Note Box */
@@ -72,6 +72,6 @@
   align-items: center;
   gap: 10px;
   font-size: 0.8rem;
-  color: #a7f3d0;
+  color: #047857;
   margin-top: var(--space-xl);
 }

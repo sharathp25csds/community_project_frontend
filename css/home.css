@@ -147,7 +147,7 @@
 .preset-chip {
   font-size: 0.725rem;
   padding: 3px 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #F8FAFC;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);
@@ -156,7 +156,7 @@
 }
 
 .preset-chip:hover {
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(37, 99, 235, 0.1);
   color: var(--primary);
   border-color: rgba(56, 189, 248, 0.3);
 }
@@ -164,7 +164,7 @@
 .demo-result-panel {
   margin-top: var(--space-md);
   padding: 14px;
-  background: rgba(15, 23, 42, 0.6);
+  background: #F8FAFC;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   display: flex;
@@ -181,7 +181,7 @@
 .demo-score-meter {
   height: 8px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.08);
+  background: #E2E8F0;
   border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
@@ -196,7 +196,7 @@
 
 /* Live Threat Ticker */
 .threat-ticker-bar {
-  background: #070c16;
+  background: #FFFFFF;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   padding: 12px 0;
@@ -298,7 +298,7 @@
 
 /* Dual Engine Showcase */
 .dual-engine-box {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));
+  background: linear-gradient(135deg, #FFFFFF, #F1F5F9);
   border: 1px solid var(--border-focus);
   border-radius: var(--radius-xl);
   padding: var(--space-2xl);
@@ -333,7 +333,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--secondary);
   box-shadow: var(--shadow-glow-indigo);
 }
@@ -359,7 +359,7 @@
 
 .step-number {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   color: rgba(56, 189, 248, 0.15);
   font-family: var(--font-mono);

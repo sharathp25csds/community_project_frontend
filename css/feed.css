@@ -165,7 +165,7 @@
 
 .feed-card-title {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--text-main);
 }
@@ -183,7 +183,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(15, 23, 42, 0.7);
+  background: #F8FAFC;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 6px 10px;
