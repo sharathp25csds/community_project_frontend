@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Report a scam, phishing website, or fraud attempt on FraudGuard AI - open public scam reporting without an account.">
+  <title>Report a Scam — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/report.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container report-container">
+      
+      <!-- Page Header -->
+      <div class="report-header">
+        <div class="hero-pill" style="margin-bottom: var(--space-xs);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Crowdsourced Intelligence • Public Submission</span>
+        </div>
+        <h1 style="font-size: clamp(2rem, 3vw, 2.5rem);">Report a Scam or Phishing Threat</h1>
+        <p style="font-size: 1.05rem; margin-top: 6px;">
+          Encountered a deceptive website, SMS trap, fraudulent investment scheme, or fake job recruiter? Submit the details below to alert and protect the community.
+        </p>
+      </div>
+
+      <!-- Success Confirmation Banner -->
+      <div id="report-success-banner" class="report-success-banner">
+        <div style="font-size:2rem; line-height:1; margin-bottom:8px;">✓</div>
+        <h3 style="color:var(--success); font-size:1.25rem;">Scam Report Submitted Successfully</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-top:4px;">
+          Thank you for strengthening community defense. Redirecting to the live community scam feed...
+        </p>
+      </div>
+
+      <!-- Main Reporting Form Card -->
+      <div class="report-card">
+        <form id="report-scam-form" novalidate>
+          
+          <!-- 1. Scam Title -->
+          <div class="form-group">
+            <label class="form-label" for="report-title">
+              <span>Incident Title <span style="color:var(--danger)">*</span></span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Concise summary (e.g. "Fake FedEx Customs Fee SMS")</span>
+            </label>
+            <input type="text" id="report-title" class="form-input" placeholder="Give this threat a clear descriptive headline..." maxlength="150" required>
+            <div id="report-title-error" class="field-error-msg">Please enter a valid descriptive title.</div>
+          </div>
+
+          <!-- 2. Scam Category -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>Threat Category <span style="color:var(--danger)">*</span></span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Select best match</span>
+            </label>
+
+            <div class="category-select-grid">
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="PHISHING" checked>
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  <span>Phishing URL</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="INVESTMENT">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+                  <span>Investment / Crypto</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="JOB_FRAUD">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                  <span>Job Fraud</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="IMPERSONATION">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span>Impersonation</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="LOTTERY">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                  <span>Fake Lottery</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="ROMANCE">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  <span>Romance Scam</span>
+                </div>
+              </label>
+
+              <label class="category-radio-card">
+                <input type="radio" name="category" value="OTHER">
+                <div class="category-radio-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Other Fraud</span>
+                </div>
+              </label>
+            </div>
+            <div id="report-category-error" class="field-error-msg">Please pick a category.</div>
+          </div>
+
+          <!-- 3. Source Evidence (URL & Contact) -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md);">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="report-source-url">
+                <span>Fraudulent Website / URL</span>
+                <span style="font-size:0.75rem; color:var(--text-dim);">Optional</span>
+              </label>
+              <input type="text" id="report-source-url" class="form-input" placeholder="e.g. http://wellsfargo-verify.xyz" spellcheck="false">
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="report-source-contact">
+                <span>Sender Phone / Email / Handle</span>
+                <span style="font-size:0.75rem; color:var(--text-dim);">Optional</span>
+              </label>
+              <input type="text" id="report-source-contact" class="form-input" placeholder="e.g. +1-800-555-0199 or @telegram_bot">
+            </div>
+          </div>
+
+          <!-- 4. Detailed Description -->
+          <div class="form-group" style="margin-top:var(--space-lg);">
+            <div class="form-label">
+              <span>Detailed Incident Narrative <span style="color:var(--danger)">*</span></span>
+              <span id="report-desc-counter" style="font-size:0.775rem; font-family:var(--font-mono); color:var(--text-dim);">0 / 5000 characters (min 20)</span>
+            </div>
+            <textarea id="report-description" class="form-textarea" style="min-height:160px;" placeholder="Describe what happened: What message did you receive? What did the scammer ask you to do (transfer money, click a link, enter credentials)? Any specific urgency phrases used?" required></textarea>
+            <div id="report-desc-error" class="field-error-msg">Please write at least 20 characters describing the incident.</div>
+          </div>
+
+          <!-- 5. Anonymous Submission Checkbox -->
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="report-anonymous" checked>
+              <div>
+                <span style="font-weight:600; color:var(--text-main);">Publish Anonymously</span>
+                <div style="font-size:0.775rem; color:var(--text-dim);">
+                  Your report will be credited as "Community Guardian". No personal details are stored.
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- 6. Submit Button & Actions -->
+          <div style="display:flex; justify-content:space-between; align-items:center; padding-top:var(--space-md); border-top:1px solid var(--border-subtle); flex-wrap:wrap; gap:var(--space-md);">
+            <a href="feed.html" class="btn btn-secondary">Cancel & Back to Feed</a>
+            <button id="report-submit-btn" type="submit" class="btn btn-primary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Publish Scam Report
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Transparency Note -->
+      <div style="margin-top:var(--space-xl); background:rgba(15, 23, 42, 0.4); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:14px 18px; font-size:0.8rem; color:var(--text-dim); line-height:1.5;">
+        <strong>Community Integrity Policy:</strong> All submissions are published with a <code>PENDING</code> verification badge. The community can upvote/downvote reports to establish consensus, and platform moderators verify confirmed threats. Never submit private passwords or credit card numbers.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/report.js"></script>
+</body>
+</html>

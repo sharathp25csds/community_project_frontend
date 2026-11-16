@@ -1,0 +1,93 @@
+/**
+ * FraudGuard AI - Design System Variables & Tokens
+ * Modern Cybersecurity & AI Aesthetics: Deep dark space canvas, neon cyan/indigo glow, crisp hierarchy.
+ */
+
+:root {
+  /* Color Palette - Core Canvas & Surfaces */
+  --bg-primary: #0a0e17;        /* Ultra deep slate blue */
+  --bg-secondary: #0f172a;      /* Slate navy container */
+  --bg-surface: #151f33;        /* Card surface */
+  --bg-surface-hover: #1e2c47;  /* Hover card surface */
+  --bg-glass: rgba(15, 23, 42, 0.75);
+  --bg-glass-card: rgba(21, 31, 51, 0.65);
+  --bg-glass-subtle: rgba(255, 255, 255, 0.03);
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-card: rgba(148, 163, 184, 0.12);
+  --border-focus: rgba(56, 189, 248, 0.6);
+  --border-glass: rgba(255, 255, 255, 0.1);
+
+  /* Primary Brand & AI Accent */
+  --primary: #38bdf8;           /* Neon Cyan */
+  --primary-glow: rgba(56, 189, 248, 0.35);
+  --primary-hover: #0284c7;
+  --secondary: #818cf8;         /* Electric Indigo */
+  --secondary-glow: rgba(129, 140, 248, 0.35);
+  --accent-purple: #c084fc;      /* AI Magenta / Purple */
+
+  /* Semantic Status Colors */
+  --danger: #f43f5e;            /* High Risk / Phishing / Scam */
+  --danger-glow: rgba(244, 63, 94, 0.35);
+  --danger-bg: rgba(244, 63, 94, 0.12);
+  --danger-border: rgba(244, 63, 94, 0.3);
+
+  --warning: #f59e0b;           /* Suspicious / Medium Risk */
+  --warning-glow: rgba(245, 158, 11, 0.35);
+  --warning-bg: rgba(245, 158, 11, 0.12);
+  --warning-border: rgba(245, 158, 11, 0.3);
+
+  --success: #10b981;           /* Legitimate / Safe */
+  --success-glow: rgba(16, 185, 129, 0.35);
+  --success-bg: rgba(16, 185, 129, 0.12);
+  --success-border: rgba(16, 185, 129, 0.3);
+
+  --info: #0ea5e9;              /* Neutral Analysis / System */
+  --info-bg: rgba(14, 165, 233, 0.12);
+
+  /* Typography Colors */
+  --text-main: #f8fafc;         /* Bright high-contrast white */
+  --text-muted: #94a3b8;        /* Soft secondary slate */
+  --text-dim: #64748b;          /* Low priority tertiary slate */
+  --text-inverse: #090d16;
+
+  /* Typography Families */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 0.75rem;  /* 12px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+  --space-3xl: 4.5rem;  /* 72px */
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows & Glows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.2);
+  --shadow-glow-indigo: 0 0 30px rgba(129, 140, 248, 0.2);
+  --shadow-glow-danger: 0 0 25px rgba(244, 63, 94, 0.25);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Container Max Width */
+  --max-width: 1240px;
+  --header-height: 72px;
+}

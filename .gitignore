@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Environment & Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.secret
+
+# Build & Cache
+dist/
+build/
+.cache/
+.parcel-cache/
+.vite/
+.next/
+.nuxt/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+*.tmp
+*.temp

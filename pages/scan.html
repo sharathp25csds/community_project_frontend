@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FraudGuard AI Threat Scanner - Scan suspicious URLs, SMS smishing, and phishing emails using multi-layered heuristic and AI diagnostics.">
+  <title>Threat Scanner — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/scan.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container scanner-container">
+      
+      <!-- Page Header -->
+      <div class="scanner-header">
+        <div class="hero-pill" style="margin-bottom: var(--space-xs);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>Preliminary Rule-Based Analysis • Public Access</span>
+        </div>
+        <h1 style="font-size: clamp(2rem, 3vw, 2.75rem);">Scam & Phishing Threat Scanner</h1>
+        <p style="max-width: 680px; font-size: 1.05rem; margin-top: 6px;">
+          Analyze suspicious URLs, SMS smishing alerts, fraudulent emails, or deceptive chat messages. Evaluates structural indicators and stores temporary records in your active browser session.
+        </p>
+
+        <!-- Mandatory ML Status Banner -->
+        <div style="margin-top: 14px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: var(--radius-md); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 8px var(--warning);"></span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">
+              Machine Learning Detection: <span style="color: var(--warning);">Not Yet Integrated.</span>
+            </span>
+          </div>
+          <span style="font-size: 0.775rem; color: var(--text-muted);">
+            Independent model training in progress (Phase 2). Using rule-based heuristics for testing.
+          </span>
+        </div>
+
+        <!-- Screenshot Scanner Cross-Link Banner -->
+        <div style="margin-top: 12px; background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.25); border-radius: var(--radius-md); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)" stroke-width="2" style="flex-shrink:0;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-size: 0.85rem; color: var(--text-main);">
+              <strong>New:</strong> Upload screenshots of suspicious SMS, WhatsApp, or banking notifications for OCR text extraction & fraud indicator analysis.
+            </span>
+          </div>
+          <a href="screenshot.html" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 5px 14px; border-color: rgba(129, 140, 248, 0.4); color: var(--accent-indigo); white-space: nowrap;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Open Screenshot Scanner &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Two-Column Scanner Layout -->
+      <div class="scanner-layout">
+
+        <!-- ===================================================================
+             LEFT COLUMN: SCANNER INPUT CARD
+             =================================================================== -->
+        <div class="scanner-card">
+          <!-- Input Type Selector Tabs -->
+          <div class="scanner-type-nav" role="tablist">
+            <button class="scan-type-btn active" data-type="URL" role="tab" aria-selected="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span>URL Link</span>
+            </button>
+            <button class="scan-type-btn" data-type="SMS" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span>SMS / Smish</span>
+            </button>
+            <button class="scan-type-btn" data-type="EMAIL" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>Email Phish</span>
+            </button>
+            <button class="scan-type-btn" data-type="MESSAGE" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Chat / Social</span>
+            </button>
+            <a href="screenshot.html" class="scan-type-btn" role="tab" style="text-decoration: none;" title="Upload screenshot for OCR & scam indicator analysis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>Screenshot</span>
+            </a>
+          </div>
+
+          <!-- URL Input Container -->
+          <div id="url-input-container" class="scanner-input-wrapper">
+            <label class="form-label" for="scan-url-field">
+              <span>Website or Domain URL to Inspect</span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">e.g. https://domain.com/login</span>
+            </label>
+            <div style="position:relative; margin-top:6px;">
+              <span class="url-prefix-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <input type="text" id="scan-url-field" class="scan-url-input" placeholder="Paste website address, short-link, or domain (e.g. http://wellsfargo-verify.top)..." spellcheck="false" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- Text / SMS / Email / Chat Textarea Container -->
+          <div id="text-input-container" class="scanner-input-wrapper" style="display:none;">
+            <div class="form-label">
+              <span id="text-field-label">Paste Suspicious Message Content</span>
+              <span class="char-counter" id="char-count">0 / 2500 chars</span>
+            </div>
+            <textarea id="scan-text-field" class="scan-textarea" style="margin-top:6px;" placeholder="Paste the message content, sender info, urgency requests, or verification codes here..." maxlength="2500"></textarea>
+          </div>
+
+          <!-- Auxiliary Row: Sample Presets -->
+          <div class="input-meta-row">
+            <span style="font-size:0.75rem; color:var(--text-dim);">Load sample test cases:</span>
+            <div id="sample-presets" class="scanner-presets">
+              <!-- Rendered via scan.js -->
+            </div>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="scanner-actions">
+            <button id="scan-clear-btn" class="btn btn-secondary btn-sm" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Clear Input
+            </button>
+            <button id="scan-submit-btn" class="btn btn-primary" type="button">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              Analyze Threat Now
+            </button>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             RIGHT COLUMN: DIAGNOSTIC RESULTS CARD
+             =================================================================== -->
+        <div class="results-card">
+          
+          <!-- State 1: Empty / Waiting State -->
+          <div id="results-empty" class="results-empty-state">
+            <div class="empty-radar-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            </div>
+            <h3 style="font-size:1.15rem; color:var(--text-main);">Scanner Ready</h3>
+            <p style="font-size:0.875rem; max-width:320px; line-height:1.5;">
+              Enter a website URL or paste a suspicious message on the left, then click <strong>Analyze Threat Now</strong> to evaluate risk indicators.
+            </p>
+            <div style="font-size:0.75rem; color:var(--text-dim); margin-top:8px;">
+              Supports Phishing URLs • Smishing SMS • Crypto Traps • Impersonation
+            </div>
+          </div>
+
+          <!-- State 2: Loading State -->
+          <div id="results-loading" class="results-loading-state">
+            <div class="scanner-radar-pulse"></div>
+            <div>
+              <h3 style="font-size:1.1rem; color:var(--text-main);">Running Diagnostic Check...</h3>
+              <p style="font-size:0.825rem; color:var(--text-muted); margin-top:4px;">
+                Checking structural heuristics, deceptive tokens, masked routes & coercion cues.
+              </p>
+            </div>
+          </div>
+
+          <!-- State 3: Active Results State -->
+          <div id="results-active" class="results-active-state">
+            
+            <!-- Result Header with Badges -->
+            <div class="result-header-row">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span id="result-risk-badge" class="badge badge-danger">
+                  <span class="badge-dot"></span> Phishing Threat
+                </span>
+                <span id="result-confidence-badge" class="badge badge-info" style="font-size:0.7rem;">Confidence: High</span>
+              </div>
+              <span id="result-engine-badge" class="badge badge-glass" style="font-size:0.65rem; color:var(--text-dim);">Heuristic Engine</span>
+            </div>
+
+            <!-- Risk Score Hero Box -->
+            <div class="result-score-hero">
+              <div id="result-score-box" class="radial-score-box">
+                <span id="result-score-num">88</span>
+                <span>/ 100</span>
+              </div>
+              <div class="score-details-col">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.85rem; font-weight:700; color:var(--text-main);">Heuristic Risk Indicator</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">Rule-Based Finding</span>
+                </div>
+                <div class="score-progress-track">
+                  <div id="result-score-bar" class="score-progress-bar" style="width:88%; background-color:var(--danger);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim);">
+                  <span>0 (Safe)</span>
+                  <span>30 (Suspicious)</span>
+                  <span>70+ (Critical Phish)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Semantic Explanation -->
+            <div>
+              <div style="font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-dim); margin-bottom:4px;">
+                Diagnostic Summary
+              </div>
+              <p id="result-explanation-text" style="font-size:0.875rem; color:var(--text-muted); line-height:1.5;">
+                Multiple high-risk indicators found. This content displays classic hallmarks of a phishing campaign aimed at harvesting credentials.
+              </p>
+            </div>
+
+            <!-- Detected Warning Signs -->
+            <div>
+              <div style="font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-dim); margin-bottom:6px;">
+                Detected Warning Flags
+              </div>
+              <ul id="result-findings-list" class="findings-list">
+                <!-- Populated via scan.js -->
+              </ul>
+            </div>
+
+            <!-- Recommended Actions Box -->
+            <div class="recommendations-box">
+              <div class="recommendations-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Recommended Safety Steps</span>
+              </div>
+              <ul id="result-recommendations-list" class="recommendations-list">
+                <!-- Populated via scan.js -->
+              </ul>
+            </div>
+
+            <!-- Community Report Bridge CTA -->
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:8px; border-top:1px solid var(--border-subtle); flex-wrap:wrap; gap:8px;">
+              <span style="font-size:0.75rem; color:var(--text-dim);">Help warn others about this threat:</span>
+              <button id="result-report-bridge-btn" class="btn btn-secondary btn-sm" type="button" style="color:var(--primary); border-color:var(--border-focus);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Publish to Community Feed &rarr;
+              </button>
+            </div>
+
+            <!-- Engine Transparency Note -->
+            <div class="engine-disclaimer-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>
+                <strong>Diagnostic Transparency:</strong> Results above are evaluated via deterministic structural heuristics. When connected to the Express backend, scans are augmented with Google Gemini semantic reasoning and custom ML classification models.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           SESSION SCAN AUDIT HISTORY (Stored in sessionStorage)
+           ===================================================================== -->
+      <section id="session-history-widget" class="session-history-widget">
+        <div class="session-history-header">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:32px; height:32px; border-radius:var(--radius-sm); background:rgba(56, 189, 248, 0.1); display:flex; align-items:center; justify-content:center; color:var(--primary);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            </div>
+            <div>
+              <h3 style="font-size:1.1rem; color:var(--text-main);">Current Session Scan History</h3>
+              <p style="font-size:0.775rem; color:var(--text-dim); margin-top:2px;">
+                Temporary audit log stored securely in your browser's <code>sessionStorage</code>. Cleared when you close the tab.
+              </p>
+            </div>
+          </div>
+          <button id="clear-session-history-btn" class="btn btn-outline btn-sm" type="button" style="font-size:0.75rem; padding:4px 10px;">
+            Clear Session Scans
+          </button>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="session-scans-table">
+            <thead>
+              <tr>
+                <th style="width:110px;">Category</th>
+                <th>Target Preview</th>
+                <th style="width:160px;">Assessed Risk</th>
+                <th style="width:100px;">Time</th>
+                <th style="width:80px; text-align:right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="session-scans-tbody">
+              <!-- Populated via scan.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/scan.js"></script>
+</body>
+</html>

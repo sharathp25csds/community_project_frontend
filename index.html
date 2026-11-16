@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="FraudGuard AI - AI-Powered Community Scam and Phishing Detection Assistant combining Google Gemini and Machine Learning to protect users from online fraud.">
+  <title>FraudGuard AI — Community Scam & Phishing Detection Assistant</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Core Design System & Components -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+
+  <!-- Reusable Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <!-- =====================================================================
+         1. HERO SECTION & INTERACTIVE PLAYGROUND
+         ===================================================================== -->
+    <section class="hero-section">
+      <div class="app-container hero-grid">
+
+        <!-- Left Hero Column: Value Proposition -->
+        <div class="hero-content">
+          <div class="hero-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span>Next-Gen Cybersecurity Assistant</span>
+          </div>
+
+          <h1 class="hero-title">
+            Detect Phishing & Scams <br>
+            <span class="gradient-text-cyan">Before They Strike</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            An intelligent scam defense platform uniting <strong>Google Gemini semantic reasoning</strong>, an
+            independent <strong>Machine Learning pattern classifier</strong>, and crowdsourced community intelligence to
+            protect you against deceptive threats.
+          </p>
+
+          <div class="hero-actions">
+            <a href="pages/scan.html" class="btn btn-primary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              Scan a Suspicious Threat
+            </a>
+            <a href="pages/feed.html" class="btn btn-secondary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+              </svg>
+              Explore Community Feed
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              <span>Dual-Engine AI Defense</span>
+            </div>
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+              <span>Verified Community Consensus</span>
+            </div>
+            <div class="trust-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>Academic Prototype</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Column: Interactive Quick Demo Playground -->
+        <div class="hero-demo-card">
+          <div class="demo-card-header">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span
+                style="width:10px; height:10px; border-radius:50%; background:var(--primary); box-shadow:0 0 8px var(--primary);"></span>
+              <span style="font-size:0.875rem; font-weight:700; color:var(--text-main);">Preliminary Rule-Based
+                Analysis</span>
+            </div>
+            <span class="badge badge-warning" style="font-size:0.65rem;">Rule-Based</span>
+          </div>
+
+          <!-- ML Not Yet Integrated Notice -->
+          <div
+            style="margin-bottom: 12px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 0.75rem; color: #fde68a; display: flex; align-items: center; gap: 6px;">
+            <span>ℹ</span>
+            <span><strong>Machine Learning Detection:</strong> Not Yet Integrated (Phase 2).</span>
+          </div>
+
+          <div class="demo-tabs">
+            <div class="demo-tab active" data-type="sms">SMS Phishing</div>
+            <div class="demo-tab" data-type="url">Fraud URL</div>
+            <div class="demo-tab" data-type="crypto">Crypto Trap</div>
+            <div class="demo-tab" data-type="safe">Safe Message</div>
+          </div>
+
+          <textarea id="demo-threat-input" class="demo-input-box"
+            placeholder="Paste suspicious SMS text, phishing URL, or message here...">ALERT: Your delivery parcel #US-8829 is on hold due to unpaid customs fee of $2.45. Resolve immediately within 12h: http://bit.ly/usps-post-pay-online</textarea>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+            <span style="font-size:0.75rem; color:var(--text-dim);">Try preset test cases:</span>
+            <div class="demo-presets">
+              <span class="preset-chip" data-preset="sms">SMS Fake Fee</span>
+              <span class="preset-chip" data-preset="url">Bank Phish URL</span>
+              <span class="preset-chip" data-preset="crypto">Airdrop Trap</span>
+              <span class="preset-chip" data-preset="safe">Legit Notice</span>
+            </div>
+          </div>
+
+          <button id="demo-analyze-btn" class="btn btn-primary" style="width:100%; margin-top:14px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            Inspect Sample Threat
+          </button>
+
+          <!-- Dynamic Analysis Result Panel -->
+          <div id="demo-result-panel" class="demo-result-panel" style="display:none;">
+            <div class="demo-score-row">
+              <span id="demo-risk-badge" class="badge badge-danger">
+                <span class="badge-dot"></span> Heuristic Risk Indicator
+              </span>
+              <span id="demo-score-number"
+                style="font-family:var(--font-mono); font-weight:700; font-size:1.1rem; color:var(--text-main);">92/100</span>
+            </div>
+
+            <div class="demo-score-meter">
+              <div id="demo-score-fill" class="demo-score-fill"
+                style="width:92%; background:var(--danger); box-shadow:0 0 10px var(--danger);"></div>
+            </div>
+
+            <p id="demo-analysis-summary"
+              style="font-size:0.8rem; color:var(--text-muted); margin-top:4px; line-height:1.4;">
+              Evaluating content semantics and deceptive indicators...
+            </p>
+
+            <ul id="demo-flags-list" style="list-style:none; padding-left:0; margin-top:6px;"></ul>
+
+            <div
+              style="margin-top:8px; padding-top:8px; border-top:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.7rem; color:var(--text-dim);">Rule-based preliminary check</span>
+              <a href="pages/scan.html" class="btn btn-outline btn-sm" style="font-size:0.75rem; padding:4px 10px;">
+                Open Full Scanner &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. LIVE COMMUNITY THREAT TICKER
+         ===================================================================== -->
+    <div class="threat-ticker-bar">
+      <div class="app-container" style="display:flex; align-items:center;">
+        <div class="ticker-label">
+          <span class="status-dot-pulse" style="width:6px; height:6px;"></span>
+          Recent Threat Feeds:
+        </div>
+        <div style="overflow:hidden; flex:1; margin-left:var(--space-md);">
+          <div id="threat-ticker-track" class="ticker-inner">
+            <!-- Populated via home.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         3. DUAL-ENGINE AI ADVANTAGE SHOWCASE
+         ===================================================================== -->
+    <section class="page-section">
+      <div class="app-container">
+        <div class="section-header">
+          <span class="section-tag">Multi-Layered Intelligence</span>
+          <h2>The Dual-AI Security Advantage</h2>
+          <p>
+            Standard security tools rely only on static blocklists that scammers bypass in seconds. FraudGuard AI pairs
+            natural language reasoning with real-world statistical pattern classification.
+          </p>
+        </div>
+
+        <div class="dual-engine-box">
+          <!-- Engine 1 -->
+          <div class="engine-col">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="feature-icon-wrapper" style="margin-bottom:0;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                </svg>
+              </div>
+              <div>
+                <h3 style="font-size:1.15rem;">Google Gemini AI</h3>
+                <span class="badge badge-primary" style="font-size:0.65rem;">Deep Semantic Reasoner</span>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; line-height:1.5;">
+              Understands nuanced human manipulation, social engineering tricks, coercive urgency, context
+              discrepancies, and novel deceptive narratives that bypass traditional keyword filters.
+            </p>
+            <ul
+              style="list-style:none; font-size:0.825rem; color:var(--text-muted); display:flex; flex-direction:column; gap:6px;">
+              <li style="display:flex; gap:6px;"><span style="color:var(--primary);">✓</span> Clear explanation of scam
+                mechanics</li>
+              <li style="display:flex; gap:6px;"><span style="color:var(--primary);">✓</span> Targeted safe remediation
+                advice</li>
+              <li style="display:flex; gap:6px;"><span style="color:var(--primary);">✓</span> Zero training overhead for
+                novel zero-day phish</li>
+            </ul>
+          </div>
+
+          <!-- Central Connector -->
+          <div class="engine-connector">
+            <div class="engine-plus-badge">+</div>
+            <span
+              style="font-size:0.75rem; color:var(--secondary); font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Combined</span>
+          </div>
+
+          <!-- Engine 2 -->
+          <div class="engine-col">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="feature-icon-wrapper"
+                style="margin-bottom:0; background:rgba(129, 140, 248, 0.1); border-color:rgba(129, 140, 248, 0.3); color:var(--secondary);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </div>
+              <div>
+                <h3 style="font-size:1.15rem;">Custom ML Classifier</h3>
+                <span class="badge"
+                  style="background:rgba(129, 140, 248, 0.15); color:var(--secondary); border:1px solid rgba(129, 140, 248, 0.3); font-size:0.65rem;">Trained
+                  Pattern Engine</span>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; line-height:1.5;">
+              Trained on real-world datasets of verified phishing URLs and spam corpora to compute sub-second
+              mathematical probability scores based on lexical and structural features.
+            </p>
+            <ul
+              style="list-style:none; font-size:0.825rem; color:var(--text-muted); display:flex; flex-direction:column; gap:6px;">
+              <li style="display:flex; gap:6px;"><span style="color:var(--secondary);">✓</span> Sub-second response time
+                for bulk checks</li>
+              <li style="display:flex; gap:6px;"><span style="color:var(--secondary);">✓</span> Pure mathematical
+                probability distributions</li>
+              <li style="display:flex; gap:6px;"><span style="color:var(--secondary);">✓</span> Completely decoupled
+                microservice design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. CORE PLATFORM CAPABILITIES GRID
+         ===================================================================== -->
+    <section class="page-section"
+      style="background:rgba(15, 23, 42, 0.4); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle);">
+      <div class="app-container">
+        <div class="section-header">
+          <span class="section-tag">Comprehensive Defense</span>
+          <h2>Everything You Need to Stay Shielded</h2>
+          <p>Built from the ground up to protect students, professionals, and everyday citizens against modern digital
+            fraud.</p>
+        </div>
+
+        <div class="feature-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </div>
+            <h3>Phishing URL Inspector</h3>
+            <p>Analyzes suspicious web links, masked domains, homograph spoofs, and redirection chains before you ever
+              click.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </div>
+            <h3>SMS & Smishing Detector</h3>
+            <p>Decodes package delivery traps, bank fake verification alerts, and coercive one-time PIN theft attempts.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3>Crowdsourced Community Feed</h3>
+            <p>Browse newly surfaced fraud schemes reported by real users in real-time. Upvote and verify confirmed
+              threats.</p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </div>
+            <h3>One-Click Scam Reporting</h3>
+            <p>Encountered a suspicious contact? File a categorized report with evidence, tags, and screenshots in
+              seconds.</p>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 14 14" />
+              </svg>
+            </div>
+            <h3>Forensic Scan History</h3>
+            <p>Keep a private, auditable log of all items you have verified. Revisit threat recommendations anytime.</p>
+          </div>
+
+          <!-- Feature 7: Screenshot Scam Detection -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper" style="background:rgba(56, 189, 248, 0.1); border-color:rgba(56, 189, 248, 0.3); color:var(--accent-cyan);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <h3>Screenshot Scam Detection</h3>
+            <p>Upload suspicious screenshots from SMS, WhatsApp, and banking notifications for OCR text extraction & fraud keyword analysis.</p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3>Role-Based Admin Oversight</h3>
+            <p>Dedicated security officer portal to verify flags, prune duplicate submissions, and maintain high threat
+              signal quality.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. HOW IT WORKS 3-STEP PROCESS
+         ===================================================================== -->
+    <section class="page-section">
+      <div class="app-container">
+        <div class="section-header">
+          <span class="section-tag">Simple & Effective</span>
+          <h2>How FraudGuard Works</h2>
+          <p>Three straightforward steps to evaluate any suspicious digital message or link.</p>
+        </div>
+
+        <div class="workflow-grid">
+          <!-- Step 1 -->
+          <div class="workflow-card">
+            <div class="step-number">01</div>
+            <h3>Submit Content</h3>
+            <p>Paste the raw text of a text message, email snippet, Telegram invite, or website URL into our scanner
+              interface.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="workflow-card">
+            <div class="step-number">02</div>
+            <h3>Dual AI Analysis</h3>
+            <p>Our backend orchestrates Google Gemini for human intent analysis and the ML service for pattern
+              probability scoring.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="workflow-card">
+            <div class="step-number">03</div>
+            <h3>Shield & Share</h3>
+            <p>Review the comprehensive safety rating, explanation, and action steps. Publish to the community feed to
+              alert others.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. COMMUNITY IMPACT & ARCHITECTURE STATUS
+         ===================================================================== -->
+    <section id="community-stats-section" class="page-section" style="border-top:1px solid var(--border-subtle);">
+      <div class="app-container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div class="stat-value">5</div>
+            <div class="stat-label">Input Modalities Supported</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Public Access (No Login)</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m9 12 2 2 4-4" />
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+            </div>
+            <div class="stat-value">Decoupled</div>
+            <div class="stat-label">Python ML & Express Architecture</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 14 14" />
+              </svg>
+            </div>
+            <div class="stat-value">Phase 1</div>
+            <div class="stat-label">Core Foundation & DB Build</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         7. CALL TO ACTION BANNER
+         ===================================================================== -->
+    <section class="page-section">
+      <div class="app-container">
+        <div class="cta-banner">
+          <h2 style="font-size:clamp(1.8rem, 3vw, 2.5rem);">Join the Shield Against Digital Fraud</h2>
+          <p style="max-width:540px; font-size:1.05rem;">
+            Whether you are analyzing a suspicious link or warning fellow citizens about a newly detected smishing scam,
+            your contribution strengthens the community defense.
+          </p>
+          <div style="display:flex; gap:var(--space-md); flex-wrap:wrap; margin-top:var(--space-xs);">
+            <a href="pages/scan.html" class="btn btn-primary btn-lg">Launch Threat Scanner</a>
+            <a href="pages/report.html" class="btn btn-secondary btn-lg">Report a Scam</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reusable Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/home.js"></script>
+</body>
+
+</html>

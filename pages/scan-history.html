@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Session Scan History - Review temporary diagnostic scan logs performed during your active browser session on FraudGuard AI.">
+  <title>Session Scan History — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/scan-history.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container history-container">
+      
+      <!-- Page Header -->
+      <div class="history-header">
+        <div>
+          <div class="hero-pill" style="margin-bottom: var(--space-xs);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+            <span>Privacy-First • Local Session Audit</span>
+          </div>
+          <h1 style="font-size: clamp(2rem, 3vw, 2.5rem);">Session Scan History</h1>
+          <p style="font-size: 1.05rem; margin-top: 6px; max-width: 680px;">
+            Review all threat inspections executed in your current browser tab. Stored client-side in <code>sessionStorage</code> and automatically cleared upon closing your browser.
+          </p>
+        </div>
+
+        <div>
+          <a href="scan.html" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            Launch Scanner
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Summary Tiles -->
+      <div class="stats-grid" style="margin-bottom: var(--space-xl);">
+        <div class="stat-card">
+          <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Total Session Scans</span>
+          <div id="history-kpi-total" style="font-size:2rem; font-weight:800; font-family:var(--font-mono); color:var(--text-main); margin-top:4px;">0</div>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Critical Threats</span>
+          <div id="history-kpi-phish" style="font-size:2rem; font-weight:800; font-family:var(--font-mono); color:var(--danger); margin-top:4px;">0</div>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Suspicious Flags</span>
+          <div id="history-kpi-suspicious" style="font-size:2rem; font-weight:800; font-family:var(--font-mono); color:var(--warning); margin-top:4px;">0</div>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Safe / Benign</span>
+          <div id="history-kpi-safe" style="font-size:2rem; font-weight:800; font-family:var(--font-mono); color:var(--success); margin-top:4px;">0</div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="history-empty-state" class="feed-empty-state" style="display:none; margin:var(--space-2xl) 0;">
+        <div class="empty-radar-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+        </div>
+        <h3 style="color:var(--text-main); font-size:1.2rem;">No Scans in Current Session</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted); max-width:380px;">
+          You haven't run any URL or message scans in this browser session yet. Run a diagnostic to see audit results logged here.
+        </p>
+        <div style="margin-top:var(--space-sm);">
+          <a href="scan.html" class="btn btn-primary btn-sm">Scan a Threat Now &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Main History Content Section -->
+      <div id="history-content-section">
+        
+        <!-- Toolbar -->
+        <div class="history-toolbar">
+          <div style="display:flex; align-items:center; gap:var(--space-sm); flex:1; max-width:440px;">
+            <input type="text" id="history-search-input" class="form-input" style="padding:8px 14px; font-size:0.875rem;" placeholder="Search session targets or risk levels...">
+            <select id="history-category-select" class="form-select" style="padding:8px 12px; font-size:0.875rem; width:140px;">
+              <option value="ALL">All Types</option>
+              <option value="URL">URLs</option>
+              <option value="SMS">SMS / Text</option>
+              <option value="EMAIL">Emails</option>
+              <option value="MESSAGE">Chat Messages</option>
+            </select>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:var(--space-sm);">
+            <button id="history-export-btn" class="btn btn-outline btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export JSON Log
+            </button>
+            <button id="history-clear-btn" class="btn btn-danger btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Clear Session
+            </button>
+          </div>
+        </div>
+
+        <!-- History Table Card -->
+        <div class="history-card">
+          <div style="overflow-x:auto;">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th style="width:110px;">Timestamp</th>
+                  <th style="width:110px;">Type</th>
+                  <th>Target Content Preview</th>
+                  <th style="width:180px;">Heuristic Finding</th>
+                  <th style="width:90px;">Warnings</th>
+                  <th style="width:160px; text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <!-- Populated via scan-history.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Privacy Assurance Note -->
+        <div class="privacy-badge-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <div>
+            <strong>Zero Persistent Tracking:</strong> Scan targets are stored exclusively inside your browser's temporary <code>sessionStorage</code>. They are never transmitted to analytics providers or stored in general visitor tracking databases.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/scan-history.js"></script>
+</body>
+</html>

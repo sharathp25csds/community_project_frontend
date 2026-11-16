@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Public Scam and Threat Analytics Dashboard - Live community fraud trends, threat categories, and real-time moderation metrics.">
+  <title>Public Threat Dashboard — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container dashboard-container">
+      
+      <!-- Page Header -->
+      <div class="dashboard-header">
+        <div>
+          <div class="hero-pill" style="margin-bottom: var(--space-xs);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Live Data Transparency • Public Dashboard</span>
+          </div>
+          <h1 style="font-size: clamp(2rem, 3vw, 2.5rem);">Public Scam & Threat Analytics</h1>
+          <p style="font-size: 1.05rem; margin-top: 6px; max-width: 680px;">
+            Real-time aggregate intelligence compiled directly from community reports. Tracks prevalent scam patterns, verified fraud vectors, and citizen alerts.
+          </p>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:var(--space-sm);">
+          <button id="dash-refresh-btn" class="btn btn-secondary btn-sm" title="Refresh metrics from database">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            Refresh Data
+          </button>
+          <a href="report.html" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Report Scam
+          </a>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="dash-loading" style="display:none; align-items:center; justify-content:center; padding:var(--space-3xl) 0;">
+        <div class="scanner-radar-pulse" style="width:50px; height:50px;"></div>
+      </div>
+
+      <!-- Empty State (Shown when 0 reports exist in database) -->
+      <div id="dash-empty-state" class="feed-empty-state" style="display:none; margin:var(--space-2xl) 0;">
+        <div class="empty-radar-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3 style="color:var(--text-main); font-size:1.2rem;">No Community Reports in Database Yet</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted); max-width:420px;">
+          The platform database currently has 0 cataloged scam reports. Once citizens begin reporting suspicious links and messages, live analytics and category charts will populate automatically.
+        </p>
+        <div style="margin-top:var(--space-sm);">
+          <a href="report.html" class="btn btn-primary btn-sm">Submit the First Scam Report &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Content -->
+      <div id="dash-content">
+        
+        <!-- 1. KPI Cards Grid -->
+        <div class="kpi-grid">
+          <!-- Total Reports -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Reports</span>
+              <div class="kpi-icon" style="background:rgba(56, 189, 248, 0.1); color:var(--primary);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+            </div>
+            <div id="kpi-total-reports" class="kpi-value">0</div>
+            <span class="kpi-subtext">Community submissions recorded</span>
+          </div>
+
+          <!-- Verified Threats -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Verified Scams</span>
+              <div class="kpi-icon" style="background:rgba(16, 185, 129, 0.1); color:var(--success);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+            </div>
+            <div id="kpi-verified-reports" class="kpi-value" style="color:var(--success);">0</div>
+            <span class="kpi-subtext">Confirmed malicious vectors</span>
+          </div>
+
+          <!-- Pending Review -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Pending Review</span>
+              <div class="kpi-icon" style="background:rgba(245, 158, 11, 0.1); color:var(--warning);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              </div>
+            </div>
+            <div id="kpi-pending-reports" class="kpi-value" style="color:var(--warning);">0</div>
+            <span class="kpi-subtext">Under community voting & review</span>
+          </div>
+
+          <!-- Session Scans Run -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Session Scans</span>
+              <div class="kpi-icon" style="background:rgba(129, 140, 248, 0.1); color:var(--secondary);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+            </div>
+            <div id="kpi-total-scans" class="kpi-value" style="color:var(--secondary);">0</div>
+            <span class="kpi-subtext">Active browser inspections</span>
+          </div>
+        </div>
+
+        <!-- 2. Charts & Distribution Grid -->
+        <div class="charts-grid">
+          <!-- Left Card: Category Breakdown -->
+          <div class="analytics-card">
+            <div class="analytics-card-header">
+              <div class="analytics-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                <span>Scam Threat Category Breakdown</span>
+              </div>
+              <span style="font-size:0.75rem; color:var(--text-dim);">By Report Frequency</span>
+            </div>
+
+            <div id="dash-category-bars" class="category-bars-list">
+              <!-- Rendered via dashboard.js -->
+            </div>
+          </div>
+
+          <!-- Right Card: Report Status Breakdown -->
+          <div class="analytics-card">
+            <div class="analytics-card-header">
+              <div class="analytics-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Moderation & Verification Status</span>
+              </div>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Community Trust</span>
+            </div>
+
+            <div class="status-stats-grid">
+              <div class="status-stat-tile" style="border-left: 3px solid var(--success);">
+                <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Confirmed Verified</span>
+                <span id="status-val-verified" class="status-stat-num" style="color:var(--success);">0</span>
+                <span style="font-size:0.7rem; color:var(--text-muted);">Proven malicious campaigns</span>
+              </div>
+
+              <div class="status-stat-tile" style="border-left: 3px solid var(--warning);">
+                <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Pending Consensus</span>
+                <span id="status-val-pending" class="status-stat-num" style="color:var(--warning);">0</span>
+                <span style="font-size:0.7rem; color:var(--text-muted);">Awaiting citizen votes</span>
+              </div>
+
+              <div class="status-stat-tile" style="border-left: 3px solid var(--danger);">
+                <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Rejected / Benign</span>
+                <span id="status-val-rejected" class="status-stat-num" style="color:var(--danger);">0</span>
+                <span style="font-size:0.7rem; color:var(--text-muted);">False alarms or invalid info</span>
+              </div>
+
+              <div class="status-stat-tile" style="border-left: 3px solid var(--primary);">
+                <span style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Access Model</span>
+                <span class="status-stat-num" style="color:var(--primary); font-size:1.35rem;">Public</span>
+                <span style="font-size:0.7rem; color:var(--text-muted);">Zero barrier citizen radar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Recent Community Activity Table Card -->
+        <div class="activity-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-md); padding-bottom:var(--space-sm); border-bottom:1px solid var(--border-subtle);">
+            <div style="font-size:1.1rem; font-weight:700; color:var(--text-main); display:flex; align-items:center; gap:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              <span>Recent Community Threat Reports</span>
+            </div>
+            <a href="feed.html" class="btn btn-outline btn-sm" style="font-size:0.75rem; padding:4px 10px;">
+              Explore Full Feed &rarr;
+            </a>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="activity-table">
+              <thead>
+                <tr>
+                  <th style="width:140px;">Category</th>
+                  <th>Incident Title</th>
+                  <th style="width:110px;">Status</th>
+                  <th style="width:140px;">Reported At</th>
+                  <th style="width:80px; text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="dash-recent-tbody">
+                <!-- Rendered via dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

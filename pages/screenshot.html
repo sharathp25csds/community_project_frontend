@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FraudGuard AI Screenshot Scam Detection - Upload screenshots of suspicious SMS, WhatsApp chats, banking alerts, and fake payment receipts for OCR text extraction and fraud indicator analysis.">
+  <title>Screenshot Scam Detection — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/screenshot.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container screenshot-container">
+      
+      <!-- Page Header -->
+      <div class="screenshot-header">
+        <div class="hero-pill" style="margin-bottom: var(--space-xs);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Computer Vision & OCR Text Extraction • Public Access</span>
+        </div>
+        <h1 style="font-size: clamp(2rem, 3vw, 2.75rem);">Screenshot Scam Detection</h1>
+        <p style="max-width: 720px; font-size: 1.05rem; margin-top: 6px; color: var(--text-muted);">
+          Upload screenshots of suspicious SMS alerts, WhatsApp chats, fake payment receipts, banking notifications, or lottery messages. The engine applies OpenCV preprocessing, extracts visible text via OCR, and flags high-risk keyword indicators.
+        </p>
+
+        <!-- ML Status Banner -->
+        <div style="margin-top: 14px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: var(--radius-md); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="header-ml-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 8px var(--warning);"></span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">
+              Machine Learning Service: <span id="header-ml-text" style="color: var(--warning);">Ready for Independent Model Connection</span>
+            </span>
+          </div>
+          <span style="font-size: 0.775rem; color: var(--text-muted);">
+            ML model developed independently. OpenCV preprocessing & Tesseract OCR active.
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Two-Column Layout -->
+      <div class="screenshot-layout">
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             LEFT COLUMN: UPLOAD & CONTROLS
+             ═══════════════════════════════════════════════════════════════════ -->
+        <div class="screenshot-card">
+          <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; color: var(--text-main);">
+            Upload Screenshot
+          </h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--space-lg);">
+            Select or drag a screenshot from your device. Images are preprocessed temporarily and automatically deleted after inspection.
+          </p>
+
+          <!-- Drag and Drop Zone -->
+          <div id="drop-zone" class="dropzone" tabindex="0" role="button" aria-label="Upload screenshot drop zone">
+            <input type="file" id="file-input" class="file-input-hidden" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+            <div class="dropzone-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <div class="dropzone-title">Drag & drop your screenshot here</div>
+            <div class="dropzone-subtitle">or click to browse your files</div>
+            <div class="dropzone-limits">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>PNG, JPG, JPEG, WEBP &bull; Max 10 MB</span>
+            </div>
+          </div>
+
+          <!-- Selected Image Preview Card -->
+          <div id="preview-card" class="preview-card">
+            <div class="preview-image-wrapper">
+              <img id="preview-image" class="preview-image" src="" alt="Screenshot preview">
+            </div>
+            <div class="preview-details">
+              <div class="preview-meta">
+                <div id="preview-name" class="preview-name">screenshot.png</div>
+                <div id="preview-specs" class="preview-specs">0 KB &bull; Calculating...</div>
+              </div>
+              <button id="btn-remove-image" type="button" class="btn-remove-preview" title="Remove selected image">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <!-- Analyze Action Button -->
+          <div class="upload-actions">
+            <button id="btn-analyze" type="button" class="btn btn-primary btn-analyze" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.3-4.3"/>
+              </svg>
+              <span>Analyze Screenshot</span>
+            </button>
+          </div>
+
+          <!-- Scanning Progress State -->
+          <div id="scanning-state" class="scanning-state">
+            <div class="scanner-radar">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="2" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <div id="scanner-step-title" style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">
+              Preprocessing Image...
+            </div>
+            <div class="scanner-progress-bar-bg">
+              <div id="scanner-progress-fill" class="scanner-progress-bar-fill"></div>
+            </div>
+            <div id="scanner-step-sub" class="scanner-step-label">
+              Applying OpenCV grayscale, contrast enhancement & Otsu binarization...
+            </div>
+          </div>
+
+          <!-- Privacy & Temporary Storage Notice -->
+          <div style="margin-top: var(--space-lg); padding: 10px 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" style="flex-shrink:0;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.4;">
+              <strong>Privacy Assurance:</strong> Uploaded images are held strictly in memory / temporary cache during OCR extraction and wiped immediately. No images are permanently stored.
+            </span>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════
+             RIGHT COLUMN: RESULTS DISPLAY
+             ═══════════════════════════════════════════════════════════════════ -->
+        <div class="results-card">
+
+          <!-- Empty State (Before Scan) -->
+          <div id="results-empty" class="results-empty-state">
+            <div class="results-empty-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.15rem; color: var(--text-main); margin-bottom: 6px;">
+              Ready for Screenshot Analysis
+            </h3>
+            <p style="font-size: 0.85rem; max-width: 380px; line-height: 1.5; color: var(--text-muted);">
+              Upload or drop a screenshot of a suspicious message on the left and click <strong>Analyze Screenshot</strong> to extract visible text and inspect deceptive patterns.
+            </p>
+          </div>
+
+          <!-- Results Content (After Scan) -->
+          <div id="results-content" class="results-content">
+
+            <!-- Detection Status Banner -->
+            <div id="status-banner" class="detection-status-banner status-unable">
+              <div>
+                <div style="font-size: 0.725rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; margin-bottom: 2px;">
+                  Detection Status
+                </div>
+                <div id="res-status-text" class="status-badge-lg">
+                  <span id="res-status-dot" style="display:inline-block; width:10px; height:10px; border-radius:50%; background:currentColor;"></span>
+                  <span>Unable to Determine</span>
+                </div>
+              </div>
+              <div id="res-ml-pill" class="ml-status-pill ml-offline">
+                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:currentColor;"></span>
+                <span id="res-ml-text">ML Service: Offline / Not Connected</span>
+              </div>
+            </div>
+
+            <!-- Detection Metadata Grid -->
+            <div class="detection-meta-grid">
+              <div class="meta-box">
+                <div class="meta-box-label">Risk Level</div>
+                <div id="res-risk-level" class="meta-box-val" style="color: var(--text-muted);">Pending ML</div>
+              </div>
+              <div class="meta-box">
+                <div class="meta-box-label">Scam Category</div>
+                <div id="res-category" class="meta-box-val" style="color: var(--text-muted);">Pending ML</div>
+              </div>
+              <div class="meta-box">
+                <div class="meta-box-label">Model Confidence</div>
+                <div id="res-confidence" class="meta-box-val" style="color: var(--text-muted);">N/A (ML Offline)</div>
+              </div>
+            </div>
+
+            <!-- OCR Extracted Text Display -->
+            <div class="ocr-section">
+              <div class="ocr-header">
+                <div class="ocr-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                  <span>Extracted Text (OCR)</span>
+                  <span id="ocr-char-count" style="font-size: 0.75rem; color: var(--text-dim); margin-left: 6px;">0 chars</span>
+                </div>
+                <button id="btn-copy-ocr" type="button" class="btn btn-secondary btn-sm" title="Copy extracted text to clipboard">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy Text</span>
+                </button>
+              </div>
+              <div id="ocr-text-box" class="ocr-box">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Detected Keyword Indicators -->
+            <div class="keywords-section">
+              <div style="font-size: 0.9rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; justify-content: space-between;">
+                <span>Heuristic Keyword Indicators</span>
+                <span id="keyword-count-badge" class="badge badge-warning" style="font-size: 0.7rem;">0 Found</span>
+              </div>
+              <div id="keyword-chips-container" class="keyword-chips-container">
+                <!-- Populated dynamically -->
+              </div>
+              <div class="indicator-disclaimer">
+                <strong>Note:</strong> Keyword matching is a rule-based heuristic indicator and NOT a machine learning prediction.
+              </div>
+            </div>
+
+            <!-- AI Explanatory Advice (Gemini Contextual Assistance) -->
+            <div id="ai-advice-container" class="ai-advice-card" style="display: none;">
+              <div class="ai-advice-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+                <span>AI Explanatory Guidance</span>
+              </div>
+              <div class="ai-advice-disclaimer">
+                Assistance generated by Gemini AI for contextual explanation only — not a verified ML classification.
+              </div>
+              <div id="ai-advice-text" class="ai-advice-text">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Safety Recommendations Checklist -->
+            <div class="safety-recommendations">
+              <div class="safety-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Recommended Safety Actions</span>
+              </div>
+              <ul id="safety-list" class="safety-list">
+                <li>Never share OTPs, UPI PINs, passwords, or banking credentials with anyone.</li>
+                <li>Do not click links or install apps (e.g., APK files, AnyDesk, TeamViewer) sent via SMS or chat.</li>
+                <li>Verify unexpected demands (electricity cut, KYC expiry, lottery) directly through official bank/utility websites or customer care numbers.</li>
+                <li>If you have already transferred funds, immediately dial 1930 (National Cyber Crime Helpline) and report to your bank.</li>
+              </ul>
+            </div>
+
+            <!-- Report Threat CTA -->
+            <div class="report-action-card">
+              <div class="report-action-text">
+                <strong>Encountered a New Fraud Pattern?</strong>
+                <span>Alert your community by submitting the extracted text to the public scam feed.</span>
+              </div>
+              <button id="btn-report-threat" type="button" class="btn btn-secondary btn-sm" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Report This Threat</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/screenshot.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Investigate detailed scam incident report on FraudGuard AI - evidence breakdown, community consensus, and safety advice.">
+  <title>Scam Threat Details — FraudGuard AI</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Page Styles -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/scam-details.css">
+</head>
+<body>
+
+  <!-- Shared Navigation Bar Mount -->
+  <div id="navbar-mount"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <main class="main-content">
+    <div class="app-container details-container">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="details-breadcrumb" aria-label="Breadcrumb">
+        <a href="feed.html">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Community Feed</span>
+        </a>
+        <span>/</span>
+        <span>Threat Investigation Report</span>
+      </nav>
+
+      <!-- Loading State -->
+      <div id="details-loading" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding:var(--space-3xl) 0; gap:var(--space-md);">
+        <div class="scanner-radar-pulse" style="width:60px; height:60px;"></div>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Retrieving threat forensic details...</p>
+      </div>
+
+      <!-- Not Found State -->
+      <div id="details-not-found" style="display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:var(--space-3xl) var(--space-lg); background:var(--bg-surface); border:1px solid var(--border-card); border-radius:var(--radius-xl); gap:var(--space-sm);">
+        <div class="empty-radar-icon">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h2 style="font-size:1.35rem; color:var(--text-main);">Report Not Found</h2>
+        <p style="font-size:0.9rem; color:var(--text-muted); max-width:380px;">The requested scam report does not exist or has been removed by platform moderators.</p>
+        <div style="margin-top:var(--space-sm);">
+          <a href="feed.html" class="btn btn-primary btn-sm">&larr; Return to Community Feed</a>
+        </div>
+      </div>
+
+      <!-- Dynamic Report Details Container -->
+      <div id="details-content" style="display:none;">
+        <!-- Populated dynamically via scam-details.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Modular Scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/components/toast.js"></script>
+  <script src="../js/components/navbar.js"></script>
+  <script src="../js/components/footer.js"></script>
+  <script src="../js/scam-details.js"></script>
+</body>
+</html>
